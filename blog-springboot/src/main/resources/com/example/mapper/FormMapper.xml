@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.FormMapper">
+
+<resultMap id="insertForm" type="com.example.pojo.Form">
+    <result column="u_id" property="username"/>
+    <result column="u_name" property="name"/>
+    <result column="u_college" property="college"/>
+    <result column="u_major" property="major"/>
+    <result column="u_city" property="city"/>
+    <result column="u_phone" property="phone"/>
+    <result column="u_sex" property="sex"/>
+    <result column="u_smoke" property="smoke"/>
+    <result column="u_clean" property="clean"/>
+    <result column="u_hulu" property="hulu"/>
+    <result column="u_game" property="game"/>
+    <result column="u_social" property="social"/>
+    <result column="u_interest" property="interest"/>
+    <result column="u_smell" property="smell"/>
+    <result column="u_introduction" property="introduction"/>
+    <result column="u_sleep" property="sleep"/>
+    <result column="u_gameName" property="gameName"/>
+    <result column="u_interestName" property="interestName"/>
+</resultMap>
+    <!--插入前端表单json数据-->
+    <insert id="InsertNewFormRecord" parameterType="com.example.pojo.Form">
+        insert into blog.user_form(u_id, u_name, u_college, u_major, u_city, u_phone, u_sex, u_smoke, u_clean, u_hulu, u_game, u_social, u_interest, u_smell, u_introduction, u_sleep, u_gameName, u_interestName) VALUES (#{username},#{name},#{college},#{major},#{city},#{phone},#{sex},#{smoke},#{clean},#{hulu},#{game},#{social},#{interest},#{smell},#{introduction},#{sleep},#{gameName},#{interestName})
+    </insert>
+
+    <!--查找该人问卷-->
+    <select id="queryDataByUsername" resultMap="insertForm">
+        select * from blog.user_form where u_id = #{username}
+    </select>
+
+    <!--查找资料是否已经存在-->
+    <select id="queryDataIsExist" resultType="java.lang.Integer">
+        select count(*) from user_form where u_id = #{username}
+    </select>
+
+    <!--查询其他表单-->
+    <select id="getOtherForms" parameterType="com.example.pojo.Form" resultMap="insertForm">
+        select * from user_form where u_college = #{college} and u_sex = #{sex} and u_id != #{username}
+    </select>
+
+</mapper>

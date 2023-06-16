@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.UserInfoMapper">
+<resultMap id="queryInfo" type="com.example.pojo.User_info">
+    <result column="u_id" property="username"/>
+    <result column="u_name" property="name"/>
+    <result column="u_sex" property="sex"/>
+    <result column="u_city" property="city"/>
+    <result column="u_collage" property="collage"/>
+    <result column="u_major" property="major"/>
+    <result column="u_email" property="email"/>
+    <result column="u_introduction" property="introduction"/>
+    <result column="u_phone" property="phone"/>
+</resultMap>
+    <!--插入新用户资料-->
+    <insert id="insertInfo" parameterType="com.example.pojo.User_info">
+        insert into user_info(u_id, u_name, u_sex, u_city, u_collage, u_major, u_email, u_introduction,u_phone) values (#{username},#{name},#{sex},#{city},#{collage},#{major},#{email},#{introduction},#{phone})
+    </insert>
+
+    <!--删除该条数据-->
+    <delete id="deleteByUsername">
+        delete from user_info where u_id = #{username}
+    </delete>
+
+    <!--查询用户资料-->
+    <select id="queryInfo" resultMap="queryInfo" parameterType="java.lang.String">
+        select u_id, u_name, u_sex, u_city, u_collage, u_major, u_email, u_introduction ,u_phone from user_info where u_id = #{username}
+    </select>
+
+    <!--查询记录是否已经存在-->
+    <select id="checkRecordIsExist" resultType="java.lang.Integer">
+        select count(*) from user_info where u_id = #{username}
+    </select>
+</mapper>

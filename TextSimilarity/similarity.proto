@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package similarity;
+import "Form.proto";
+
+service Similarity {
+  rpc getSimilarity (similarityRequest) returns (similarityResponse) {}
+}
+
+message similarityRequest {
+  repeated int32 choices1 = 1;
+  string text1 = 2;
+  repeated int32 choices2 = 3;
+  string text2 = 4;
+}
+
+message similarityResponse {
+  double score = 1;
+}

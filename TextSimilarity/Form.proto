@@ -1,0 +1,23 @@
+syntax = "proto3";
+package similarity;
+
+message form {
+  string username = 1;
+  string name = 2;
+  string city = 3;
+  string college = 4;
+  string major = 5;
+  string phone = 6;
+  int32 sex = 7;
+  int32 smoke = 8;
+  int32 clean = 9;
+  int32 hulu = 10;
+  int32 game = 11;
+  string gameName = 12;
+  int32 social = 13;
+  int32 interest = 14;
+  string interestName = 15;
+  string introduction = 16;
+  int32 smell = 17;
+  int32 sleep = 18;
+}

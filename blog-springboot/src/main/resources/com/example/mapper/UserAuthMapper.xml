@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.UserAuthMapper">
+
+    <!--注册-->
+    <insert id="register">
+        insert into user_auth(U_ID, U_PASSWORD, U_EMAIL) values (#{username},#{password},#{email})
+    </insert>
+
+    <!--设置flag-->
+    <update id="setDataFlag">
+        update user_auth set data_flag = 1 where u_id = #{username}
+    </update>
+
+    <!--登录检验用户名和密码-->
+    <select id="checkUsernameAndPsd" resultType="java.lang.Integer">
+        select count(*) from user_auth where u_id=#{username} and u_password=#{password}
+    </select>
+
+    <!--查验用户名是否已经存在-->
+    <select id="checkUsernameExist" resultType="java.lang.Integer">
+        select count(*) from user_auth where u_id=#{username}
+    </select>
+
+    <!--进入主页后查验是否已经填写个人资料-->
+    <select id="checkDataIsSet" resultType="java.lang.Integer">
+        select data_flag from user_auth where u_id = #{username}
+    </select>
+
+</mapper>
